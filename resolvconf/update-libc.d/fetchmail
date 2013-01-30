@@ -1,0 +1,12 @@
+#!/bin/sh
+
+while [ "$1" ]; do
+	if [ "$1" = "--nscd" ]; then
+		exit 0
+	fi
+	shift
+done
+
+if [ -x /etc/init.d/fetchmail ]; then
+	/etc/init.d/fetchmail awaken
+fi

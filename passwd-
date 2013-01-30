@@ -25,3 +25,5 @@ ntp:x:104:106::/home/ntp:/bin/false
 postfix:x:105:108::/var/spool/postfix:/bin/false
 dovecot:x:106:110:Dovecot mail server,,,:/usr/lib/dovecot:/bin/false
 mysql:x:107:111:MySQL Server,,,:/var/lib/mysql:/bin/false
+vmail:x:5000:5000::/NAS/mail/vmail:/bin/sh
+fetchmail:x:108:65534::/var/lib/fetchmail:/bin/false
