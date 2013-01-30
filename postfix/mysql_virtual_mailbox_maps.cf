@@ -1,5 +1,5 @@
 hosts = 127.0.0.1
 user = postfix
-password = '(((postfix1)))'
+password = (((postfix1)))
 dbname = postfixadmin
 query = SELECT maildir FROM mailbox WHERE username='%s' AND active = 1
