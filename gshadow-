@@ -32,7 +32,7 @@ shadow:*::
 utmp:*::
 video:*::mitcheja
 sasl:*::
-plugdev:*::
+plugdev:*::mitcheja
 staff:*::
 games:*::
 users:*::

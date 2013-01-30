@@ -18,7 +18,7 @@ voice:x:22:
 cdrom:x:24:mitcheja
 floppy:x:25:mitcheja
 tape:x:26:
-sudo:x:27:
+sudo:x:27:mitcheja
 audio:x:29:mitcheja
 dip:x:30:mitcheja
 www-data:x:33:

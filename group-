@@ -32,7 +32,7 @@ shadow:x:42:
 utmp:x:43:
 video:x:44:mitcheja
 sasl:x:45:
-plugdev:x:46:
+plugdev:x:46:mitcheja
 staff:x:50:
 games:x:60:
 users:x:100:
