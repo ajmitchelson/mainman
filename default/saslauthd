@@ -4,7 +4,7 @@
 #
 
 # Should saslauthd run automatically on startup? (default: no)
-START=no
+START=yes
 
 # Description of this saslauthd instance. Recommended.
 # (suggestion: SASL Authentication Daemon)
@@ -29,11 +29,11 @@ NAME="saslauthd"
 # for more information.
 #
 # Example: MECHANISMS="pam"
-MECHANISMS="pam"
+MECHANISMS="rimap"
 
 # Additional options for this mechanism. (default: none)
 # See the saslauthd man page for information about mech-specific options.
-MECH_OPTIONS=""
+MECH_OPTIONS="localhost"
 
 # How many saslauthd processes should we run? (default: 5)
 # A value of 0 will fork a new process for each connection.
@@ -51,12 +51,5 @@ THREADS=5
 # See the saslauthd man page and the output of 'saslauthd -h' for general
 # information about these options.
 #
-# Example for chroot Postfix users: "-c -m /var/spool/postfix/var/run/saslauthd"
-# Example for non-chroot Postfix users: "-c -m /var/run/saslauthd"
-#
-# To know if your Postfix is running chroot, check /etc/postfix/master.cf.
-# If it has the line "smtp inet n - y - - smtpd" or "smtp inet n - - - - smtpd"
-# then your Postfix is running in a chroot.
-# If it has the line "smtp inet n - n - - smtpd" then your Postfix is NOT
-# running in a chroot.
-OPTIONS="-c -m /var/run/saslauthd"
+# Example for postfix users: "-c -m /var/spool/postfix/var/run/saslauthd"
+OPTIONS="-c -m /var/spool/postfix/var/run/saslauthd -r"
