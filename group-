@@ -48,3 +48,5 @@ ssl-cert:x:107:
 postfix:x:108:
 postdrop:x:109:
 dovecot:x:110:
+mysql:x:111:
+vmail:x:5000:

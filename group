@@ -31,7 +31,7 @@ gnats:x:41:
 shadow:x:42:
 utmp:x:43:
 video:x:44:mitcheja
-sasl:x:45:
+sasl:x:45:postfix
 plugdev:x:46:mitcheja
 staff:x:50:
 games:x:60:
@@ -49,3 +49,4 @@ postfix:x:108:
 postdrop:x:109:
 dovecot:x:110:
 mysql:x:111:
+vmail:x:5000:

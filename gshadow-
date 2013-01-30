@@ -48,3 +48,5 @@ ssl-cert:!::
 postfix:!::
 postdrop:!::
 dovecot:!::
+mysql:!::
+vmail:!::

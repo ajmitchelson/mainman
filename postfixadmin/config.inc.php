@@ -33,7 +33,7 @@ $CONF['configured'] = true;
 // In order to setup Postfixadmin, you MUST specify a hashed password here.
 // To create the hash, visit setup.php in a browser and type a password into the field,
 // on submission it will be echoed out to you as a hashed value.
-$CONF['setup_password'] = 'changeme';
+$CONF['setup_password'] = 'a8084c9ff7a09f3e9a8ec9085b88cfcd:c55f49adac4b28ea73615fb2bce1af18b04de28a';
 
 // Postfix Admin Path
 // Set the location of your Postfix Admin installation here.
@@ -51,11 +51,11 @@ $CONF['default_language'] = 'en';
 // mysql = MySQL 3.23 and 4.0, 4.1 or 5
 // mysqli = MySQL 4.1+ 
 // pgsql = PostgreSQL
-$CONF['database_type'] = $dbtype;
-$CONF['database_host'] = $dbserver;
-$CONF['database_user'] = $dbuser;
-$CONF['database_password'] = $dbpass;
-$CONF['database_name'] = $dbname;
+$CONF['database_type'] = 'mysqli';
+$CONF['database_host'] = 'localhost';
+$CONF['database_user'] = 'postfixadmin';
+$CONF['database_password'] = '(((Admin1)))';
+$CONF['database_name'] = 'postfixadmin';
 // If you need to specify a different port for a MYSQL database connection, use e.g.
 //   $CONF['database_host'] = '172.30.33.66:3308';
 // If you need to specify a different port for POSTGRESQL database connection
@@ -84,7 +84,7 @@ $CONF['database_tables'] = array (
 // Site Admin
 // Define the Site Admins email address below.
 // This will be used to send emails from to create mailboxes.
-$CONF['admin_email'] = 'postmaster@change-this-to-your.domain.tld';
+$CONF['admin_email'] = 'postmaster@mainman.home.lan';
 
 // Mail Server
 // Hostname (FQDN) of your mail server.
@@ -135,10 +135,10 @@ $CONF['page_size'] = '10';
 // Default Aliases
 // The default aliases that need to be created for all domains.
 $CONF['default_aliases'] = array (
-    'abuse' => 'abuse@change-this-to-your.domain.tld',
-    'hostmaster' => 'hostmaster@change-this-to-your.domain.tld',
-    'postmaster' => 'postmaster@change-this-to-your.domain.tld',
-    'webmaster' => 'webmaster@change-this-to-your.domain.tld'
+    'abuse' => 'abuse@mainman.home.lan',
+    'hostmaster' => 'hostmaster@mainman.home.lan',
+    'postmaster' => 'postmaster@mainman.home.lan',
+    'webmaster' => 'webmaster@mainman.home.lan'
 );
 
 // Mailboxes
@@ -146,13 +146,13 @@ $CONF['default_aliases'] = array (
 // Examples:
 //   YES: /usr/local/virtual/domain.tld/username@domain.tld
 //   NO:  /usr/local/virtual/username@domain.tld
-$CONF['domain_path'] = 'NO';
+$CONF['domain_path'] = 'YES';
 // If you don't want to have the domain in your mailbox set this to 'NO'.
 // Examples: 
 //   YES: /usr/local/virtual/domain.tld/username@domain.tld
 //   NO:  /usr/local/virtual/domain.tld/username
 // Note: If $CONF['domain_path'] is set to NO, this setting will be forced to YES.
-$CONF['domain_in_mailbox'] = 'YES';
+$CONF['domain_in_mailbox'] = 'NO';
 // If you want to define your own function to generate a maildir path set this to the name of the function.
 // Notes: 
 //   - this configuration directive will override both domain_path and domain_in_mailbox
@@ -218,7 +218,7 @@ $CONF['vacation'] = 'NO';
 // This is the autoreply domain that you will need to set in your Postfix
 // transport maps to handle virtual vacations. It does not need to be a
 // real domain (i.e. you don't need to setup DNS for it).
-$CONF['vacation_domain'] = 'autoreply.change-this-to-your.domain.tld';
+$CONF['vacation_domain'] = 'autoreply.mainman.home.lan';
 
 // Vacation Control
 // If you want users to take control of vacation set this to 'YES'.
@@ -285,14 +285,14 @@ $CONF['show_header_text'] = 'NO';
 $CONF['header_text'] = ':: Postfix Admin ::';
 
 // link to display under 'Main' menu when logged in as a user.
-$CONF['user_footer_link'] = "http://change-this-to-your.domain.tld/main";
+$CONF['user_footer_link'] = "http://mainman.home.lan/main";
 
 // Footer
 // Below information will be on all pages.
 // If you don't want the footer information to appear set this to 'NO'.
 $CONF['show_footer_text'] = 'YES';
-$CONF['footer_text'] = 'Return to change-this-to-your.domain.tld';
-$CONF['footer_link'] = 'http://change-this-to-your.domain.tld';
+$CONF['footer_text'] = 'Return to mainman.home.lan';
+$CONF['footer_link'] = 'http://mainman.home.lan';
 
 // Welcome Message
 // This message is send to every newly created mailbox.
