@@ -4,10 +4,10 @@ rsyslog: exim4 atd sendsigs
 umountnfs.sh: exim4 atd sendsigs rsyslog
 portmap: umountnfs.sh
 nfs-common: umountnfs.sh
-hwclock.sh: atd rsyslog nfs-common
+hwclock.sh: atd nfs-common rsyslog
 networking: portmap exim4 umountnfs.sh
 ifupdown: portmap exim4 networking umountnfs.sh
-umountfs: portmap exim4 atd hwclock.sh networking ifupdown urandom umountnfs.sh
+umountfs: hwclock.sh portmap exim4 atd networking ifupdown urandom umountnfs.sh
 lvm2: umountfs
 umountroot: lvm2 umountfs
 halt: umountroot
