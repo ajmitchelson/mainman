@@ -43,3 +43,4 @@ Debian-exim:x:103:
 mlocate:x:104:
 ssh:x:105:
 mitcheja:x:1000:
+ntp:x:106:
