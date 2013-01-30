@@ -23,4 +23,5 @@ mitcheja:x:1000:1000:AJ Mitchelson,,,:/home/mitcheja:/bin/bash
 sshd:x:103:65534::/var/run/sshd:/usr/sbin/nologin
 ntp:x:104:106::/home/ntp:/bin/false
 postfix:x:105:108::/var/spool/postfix:/bin/false
-dovecot:x:106:110::/usr/lib/dovecot:/bin/false
+dovecot:x:106:110:Dovecot mail server,,,:/usr/lib/dovecot:/bin/false
+mysql:x:107:111::/var/lib/mysql:/bin/false
