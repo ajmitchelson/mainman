@@ -13,3 +13,6 @@ deb-src http://security.debian.org/ squeeze/updates main
 # squeeze-updates, previously known as 'volatile'
 deb http://ftp.uk.debian.org/debian/ squeeze-updates main
 deb-src http://ftp.uk.debian.org/debian/ squeeze-updates main
+
+# squeeze-backports
+deb http://backports.debian.org/debian-backports squeeze-backports main

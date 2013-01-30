@@ -15,3 +15,6 @@ UUID=f66b879d-caff-4c19-8213-405423f49305 /boot           ext2    defaults      
 /dev/mapper/mainman-var /var            ext3    defaults        0       2
 /dev/mapper/mainman-swap_1 none            swap    sw              0       0
 /dev/scd0       /media/cdrom0   udf,iso9660 user,noauto     0       0
+#
+# NAS NFS mount point
+n4100plus:/raid/mainman /NAS   nfs     rsize=8192,wsize=8192,timeo=14,intr,nolock,noacl	0	0
