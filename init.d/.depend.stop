@@ -1,0 +1,14 @@
+TARGETS = urandom exim4 atd sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
+sendsigs: exim4 atd
+rsyslog: exim4 atd sendsigs
+umountnfs.sh: exim4 atd sendsigs rsyslog
+portmap: umountnfs.sh
+nfs-common: umountnfs.sh
+hwclock.sh: atd rsyslog nfs-common
+networking: portmap exim4 umountnfs.sh
+ifupdown: portmap exim4 networking umountnfs.sh
+umountfs: portmap exim4 atd hwclock.sh networking ifupdown urandom umountnfs.sh
+lvm2: umountfs
+umountroot: lvm2 umountfs
+halt: umountroot
+reboot: umountroot

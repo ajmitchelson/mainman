@@ -1,0 +1,10 @@
+TARGETS = killprocs portmap nfs-common rsyslog exim4 atd cron acpid bootlogs single rc.local stop-bootlogd rmnologin
+INTERACTIVE =
+exim4: rsyslog
+atd: rsyslog
+cron: rsyslog
+acpid: rsyslog
+single: killprocs bootlogs
+rc.local: rsyslog portmap exim4 atd nfs-common bootlogs cron acpid
+stop-bootlogd: portmap exim4 rsyslog atd nfs-common bootlogs cron acpid
+rmnologin: portmap exim4 rsyslog atd nfs-common bootlogs cron acpid
