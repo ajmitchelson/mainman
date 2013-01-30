@@ -1,15 +1,16 @@
-TARGETS = killprocs portmap nfs-common rsyslog sudo exim4 postfix atd ssh rsync ntp acpid cron dovecot bootlogs single rc.local rmnologin stop-bootlogd
+TARGETS = killprocs portmap nfs-common rsyslog sudo exim4 postfix atd dovecot ssh rsync ntp acpid cron lighttpd bootlogs single rc.local rmnologin stop-bootlogd
 INTERACTIVE =
 exim4: rsyslog
 postfix: rsyslog
 atd: rsyslog
+dovecot: rsyslog
 ssh: rsyslog
 rsync: rsyslog
 ntp: rsyslog
 acpid: rsyslog
 cron: rsyslog
-dovecot: rsyslog
+lighttpd: rsyslog
 single: killprocs bootlogs
-rc.local: rsyslog portmap exim4 postfix atd nfs-common bootlogs ssh sudo rsync ntp acpid cron dovecot
-rmnologin: sudo portmap exim4 rsyslog postfix atd nfs-common bootlogs ssh rsync ntp acpid cron dovecot
-stop-bootlogd: portmap exim4 rsyslog postfix atd nfs-common bootlogs ssh sudo rsync ntp acpid cron dovecot
+rc.local: rsyslog portmap exim4 postfix atd nfs-common dovecot bootlogs ssh sudo rsync ntp acpid cron lighttpd
+rmnologin: sudo portmap exim4 rsyslog postfix atd nfs-common dovecot bootlogs ssh rsync ntp acpid cron lighttpd
+stop-bootlogd: portmap exim4 rsyslog postfix atd nfs-common dovecot bootlogs ssh sudo rsync ntp acpid cron lighttpd

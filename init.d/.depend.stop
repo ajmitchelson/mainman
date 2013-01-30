@@ -1,13 +1,13 @@
-TARGETS = urandom exim4 postfix atd dovecot sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
-sendsigs: exim4 postfix atd dovecot
-rsyslog: exim4 postfix atd sendsigs dovecot
-umountnfs.sh: exim4 postfix atd sendsigs rsyslog dovecot
+TARGETS = urandom exim4 postfix atd dovecot lighttpd sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
+sendsigs: exim4 postfix atd dovecot lighttpd
+rsyslog: exim4 postfix atd sendsigs dovecot lighttpd
+umountnfs.sh: exim4 postfix atd sendsigs rsyslog dovecot lighttpd
 portmap: umountnfs.sh
 nfs-common: umountnfs.sh
 hwclock.sh: atd nfs-common rsyslog
-networking: portmap exim4 postfix umountnfs.sh dovecot
-ifupdown: portmap exim4 postfix networking umountnfs.sh dovecot
-umountfs: hwclock.sh portmap exim4 postfix atd networking ifupdown urandom umountnfs.sh dovecot
+networking: portmap exim4 postfix dovecot umountnfs.sh lighttpd
+ifupdown: portmap exim4 postfix networking dovecot umountnfs.sh lighttpd
+umountfs: hwclock.sh portmap exim4 postfix atd networking ifupdown dovecot urandom umountnfs.sh lighttpd
 lvm2: umountfs
 umountroot: lvm2 umountfs
 halt: umountroot
