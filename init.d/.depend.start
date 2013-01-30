@@ -1,4 +1,4 @@
-TARGETS = killprocs portmap nfs-common rsyslog sudo mysql lighttpd atd ssh rsync ntp acpid cron exim4 dovecot postfix bootlogs single rc.local rmnologin stop-bootlogd
+TARGETS = killprocs portmap nfs-common rsyslog saslauthd sudo mysql lighttpd atd ssh rsync ntp acpid cron exim4 dovecot postfix bootlogs single rc.local rmnologin stop-bootlogd
 INTERACTIVE =
 mysql: rsyslog
 lighttpd: rsyslog
@@ -10,8 +10,8 @@ acpid: rsyslog
 cron: rsyslog
 exim4: rsyslog mysql
 dovecot: rsyslog mysql
-postfix: rsyslog mysql dovecot
+postfix: rsyslog mysql saslauthd dovecot
 single: killprocs bootlogs
-rc.local: rsyslog portmap nfs-common exim4 mysql lighttpd postfix dovecot atd bootlogs ssh sudo rsync ntp acpid cron
-rmnologin: sudo portmap nfs-common exim4 rsyslog mysql lighttpd postfix dovecot atd bootlogs ssh rsync ntp acpid cron
-stop-bootlogd: portmap nfs-common exim4 rsyslog mysql lighttpd postfix dovecot atd bootlogs ssh sudo rsync ntp acpid cron
+rc.local: rsyslog exim4 mysql lighttpd postfix saslauthd dovecot atd portmap nfs-common bootlogs ssh sudo rsync ntp acpid cron
+rmnologin: sudo exim4 rsyslog mysql lighttpd postfix saslauthd dovecot atd portmap nfs-common bootlogs ssh rsync ntp acpid cron
+stop-bootlogd: exim4 rsyslog mysql lighttpd postfix saslauthd dovecot atd portmap nfs-common bootlogs ssh sudo rsync ntp acpid cron

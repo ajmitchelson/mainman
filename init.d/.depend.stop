@@ -1,16 +1,17 @@
-TARGETS = urandom lighttpd atd exim4 postfix dovecot mysql sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
+TARGETS = urandom lighttpd atd exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
+saslauthd: postfix
 dovecot: postfix
 mysql: exim4 postfix dovecot
-sendsigs: exim4 mysql lighttpd postfix atd dovecot
-rsyslog: exim4 mysql sendsigs lighttpd postfix atd dovecot
-umountnfs.sh: exim4 mysql rsyslog lighttpd postfix atd sendsigs dovecot
+sendsigs: exim4 lighttpd postfix atd mysql dovecot
+rsyslog: exim4 sendsigs lighttpd postfix atd mysql dovecot
+umountnfs.sh: exim4 rsyslog lighttpd postfix atd mysql dovecot sendsigs
 portmap: umountnfs.sh
 nfs-common: umountnfs.sh
-hwclock.sh: nfs-common mysql rsyslog atd
-networking: umountnfs.sh exim4 mysql lighttpd postfix dovecot portmap
-ifupdown: umountnfs.sh exim4 mysql lighttpd postfix networking dovecot portmap
-umountfs: hwclock.sh ifupdown umountnfs.sh exim4 mysql lighttpd postfix networking atd dovecot urandom portmap
+hwclock.sh: rsyslog atd mysql nfs-common
+networking: exim4 lighttpd postfix umountnfs.sh mysql dovecot portmap
+ifupdown: exim4 lighttpd postfix umountnfs.sh mysql dovecot portmap networking
+umountfs: exim4 lighttpd ifupdown postfix atd umountnfs.sh mysql hwclock.sh dovecot portmap urandom networking
 lvm2: umountfs
-umountroot: lvm2 umountfs
+umountroot: umountfs lvm2
 halt: umountroot
 reboot: umountroot

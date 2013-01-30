@@ -28,4 +28,4 @@ mountnfs-bootclean.sh: mountall.sh mountoverflowtmp mountnfs.sh
 kbd: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh
 console-setup: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh kbd
 bootmisc.sh: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh udev
-stop-bootlogd-single: mountall.sh mountoverflowtmp udev keyboard-setup console-setup hwclock.sh checkroot.sh ifupdown ifupdown-clean networking portmap nfs-common mountnfs.sh mountnfs-bootclean.sh lvm2 mountdevsubfs.sh checkfs.sh mountkernfs.sh urandom hostname.sh hwclockfirst.sh mountall-bootclean.sh bootmisc.sh procps module-init-tools kbd mtab.sh bootlogd udev-mtab
+stop-bootlogd-single: mountall.sh mountoverflowtmp udev keyboard-setup console-setup mountnfs.sh mountnfs-bootclean.sh networking ifupdown hwclock.sh ifupdown-clean portmap nfs-common lvm2 mountdevsubfs.sh checkfs.sh checkroot.sh urandom mountkernfs.sh hostname.sh hwclockfirst.sh mountall-bootclean.sh bootmisc.sh procps module-init-tools kbd mtab.sh bootlogd udev-mtab
