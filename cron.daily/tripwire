@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+tripwire=/usr/sbin/tripwire
+
+[ -x $tripwire ] || exit 0
+
+umask 027
+
+$tripwire --check --quiet --email-report
