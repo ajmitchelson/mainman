@@ -12,3 +12,4 @@ abuse: root
 noc: root
 security: root
 root: mitcheja
+monit: root

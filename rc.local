@@ -11,4 +11,6 @@
 #
 # By default this script does nothing.
 
+/opt/mmonit/bin/mmonit
+
 exit 0
