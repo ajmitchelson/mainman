@@ -16,3 +16,6 @@ deb-src http://ftp.uk.debian.org/debian/ squeeze-updates main contrib non-free
 
 # squeeze-backports
 deb http://backports.debian.org/debian-backports squeeze-backports main contrib non-free
+
+# Izzysoft (for monitorix)
+deb http://apt.izzysoft.de/ubuntu generic universe
