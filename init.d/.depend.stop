@@ -1,5 +1,4 @@
-TARGETS = monit monitorix urandom lighttpd atd exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
-monitorix: monit
+TARGETS = monit urandom lighttpd atd exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh portmap nfs-common hwclock.sh networking ifupdown umountfs lvm2 umountroot halt reboot
 urandom: monit
 lighttpd: monit
 atd: monit
