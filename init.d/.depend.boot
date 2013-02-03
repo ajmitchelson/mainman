@@ -1,4 +1,4 @@
-TARGETS = mountkernfs.sh udev mountdevsubfs.sh bootlogd keyboard-setup lvm2 hostname.sh hwclockfirst.sh checkroot.sh hwclock.sh ifupdown-clean module-init-tools mtab.sh checkfs.sh ifupdown mountall.sh mountall-bootclean.sh mountoverflowtmp networking urandom procps x11-common udev-mtab portmap nfs-common mountnfs.sh mountnfs-bootclean.sh kbd console-setup bootmisc.sh stop-bootlogd-single
+TARGETS = mountkernfs.sh udev mountdevsubfs.sh bootlogd keyboard-setup lvm2 hostname.sh hwclockfirst.sh checkroot.sh hwclock.sh ifupdown-clean module-init-tools mtab.sh checkfs.sh ifupdown mountall.sh mountall-bootclean.sh mountoverflowtmp networking urandom procps udev-mtab portmap nfs-common mountnfs.sh mountnfs-bootclean.sh kbd console-setup bootmisc.sh stop-bootlogd-single
 INTERACTIVE = udev keyboard-setup checkroot.sh checkfs.sh kbd console-setup
 udev: mountkernfs.sh
 mountdevsubfs.sh: mountkernfs.sh udev
@@ -20,7 +20,6 @@ mountoverflowtmp: mountall-bootclean.sh
 networking: mountkernfs.sh mountall.sh mountoverflowtmp ifupdown
 urandom: mountall.sh mountoverflowtmp
 procps: mountkernfs.sh mountall.sh mountoverflowtmp udev module-init-tools bootlogd
-x11-common: mountall.sh mountoverflowtmp
 udev-mtab: udev mountall.sh mountoverflowtmp
 portmap: networking ifupdown mountall.sh mountoverflowtmp
 nfs-common: portmap hwclock.sh
@@ -29,4 +28,4 @@ mountnfs-bootclean.sh: mountall.sh mountoverflowtmp mountnfs.sh
 kbd: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh
 console-setup: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh kbd
 bootmisc.sh: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh udev
-stop-bootlogd-single: mountall.sh mountoverflowtmp udev keyboard-setup console-setup networking ifupdown portmap nfs-common mountnfs.sh mountnfs-bootclean.sh hwclock.sh checkroot.sh lvm2 mountdevsubfs.sh checkfs.sh mountkernfs.sh urandom ifupdown-clean hostname.sh hwclockfirst.sh mountall-bootclean.sh bootmisc.sh procps module-init-tools kbd x11-common mtab.sh bootlogd udev-mtab
+stop-bootlogd-single: mountall.sh mountoverflowtmp udev keyboard-setup console-setup networking ifupdown portmap nfs-common mountnfs.sh mountnfs-bootclean.sh hwclock.sh checkroot.sh lvm2 mountdevsubfs.sh checkfs.sh mountkernfs.sh urandom ifupdown-clean hostname.sh hwclockfirst.sh mountall-bootclean.sh bootmisc.sh procps module-init-tools kbd mtab.sh bootlogd udev-mtab
