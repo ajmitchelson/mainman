@@ -52,3 +52,4 @@ fi
 export http_proxy=http://gatekeeper:8080/
 export https_proxy=http://gatekeeper:8080/
 export ftp_proxt=http://gatekeeper:8080/
+export ftps_proxt=http://gatekeeper:8080/
