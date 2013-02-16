@@ -119,7 +119,7 @@ attachments   +I text/plain
 ## line is unnecessary if you already have "attach-allow */.*", of
 ## course.  These are off by default!  The MIME elements contained
 ## within a message/* or multipart/* are still examined, even if the
-## containers themseves don't qualify.
+## containers themselves don't qualify.
 ##
 #attachments  +A message/.* multipart/.*
 #attachments  +I message/.* multipart/.*
@@ -127,9 +127,6 @@ attachments   +I text/plain
 ## You probably don't really care to know about deleted attachments.
 attachments   -A message/external-body
 attachments   -I message/external-body
-
-# enable mime lookup by extension
-mime_lookup application/octet-stream
 
 ##
 # See /usr/share/doc/mutt/README.Debian for details.
