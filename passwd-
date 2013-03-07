@@ -27,3 +27,4 @@ dovecot:x:106:110:Dovecot mail server,,,:/usr/lib/dovecot:/bin/false
 mysql:x:107:111:MySQL Server,,,:/var/lib/mysql:/bin/false
 vmail:x:5000:5000::/NAS/mail/vmail:/bin/sh
 fetchmail:x:108:65534::/var/lib/fetchmail:/bin/false
+munin:x:109:112::/var/lib/munin:/bin/false

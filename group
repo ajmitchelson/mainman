@@ -50,3 +50,4 @@ postdrop:x:109:
 dovecot:x:110:
 mysql:x:111:
 vmail:x:5000:
+munin:x:112:
