@@ -1,22 +1,24 @@
-TARGETS = munin-node monit urandom portmap lighttpd atd exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh nfs-common networking hwclock.sh ifupdown umountfs lvm2 umountroot halt reboot
-urandom: munin-node monit
-portmap: munin-node monit
-lighttpd: munin-node monit
-atd: munin-node monit
-exim4: munin-node monit
-postfix: munin-node monit
-saslauthd: postfix munin-node monit
-dovecot: postfix munin-node monit
-mysql: dovecot exim4 postfix munin-node monit
-sendsigs: lighttpd dovecot munin-node exim4 mysql monit atd postfix
-rsyslog: lighttpd dovecot exim4 mysql atd postfix sendsigs munin-node monit
-umountnfs.sh: lighttpd dovecot munin-node sendsigs exim4 mysql monit atd postfix rsyslog
-nfs-common: umountnfs.sh munin-node monit
-networking: umountnfs.sh lighttpd dovecot portmap exim4 mysql postfix munin-node monit
-hwclock.sh: mysql nfs-common atd rsyslog munin-node monit
-ifupdown: umountnfs.sh lighttpd dovecot portmap exim4 mysql postfix networking munin-node monit
-umountfs: umountnfs.sh lighttpd hwclock.sh dovecot munin-node ifupdown portmap exim4 mysql monit urandom atd postfix networking
-lvm2: umountfs munin-node monit
-umountroot: umountfs lvm2 munin-node monit
-halt: umountroot munin-node monit
-reboot: umountroot munin-node monit
+TARGETS = monit urandom portmap munin-node munin lighttpd atd exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh nfs-common networking hwclock.sh ifupdown umountfs lvm2 umountroot halt reboot
+urandom: monit
+portmap: monit
+munin-node: monit
+munin: monit
+lighttpd: monit
+atd: monit
+exim4: monit
+postfix: monit
+saslauthd: postfix monit
+dovecot: postfix monit
+mysql: dovecot exim4 postfix monit
+sendsigs: lighttpd dovecot exim4 mysql munin-node monit atd postfix munin
+rsyslog: lighttpd dovecot exim4 mysql atd postfix sendsigs monit
+umountnfs.sh: lighttpd dovecot sendsigs exim4 mysql munin-node monit atd postfix rsyslog munin
+nfs-common: umountnfs.sh monit
+networking: umountnfs.sh lighttpd dovecot portmap exim4 mysql munin-node postfix munin monit
+hwclock.sh: mysql nfs-common atd rsyslog monit
+ifupdown: umountnfs.sh lighttpd dovecot portmap exim4 mysql munin-node postfix networking munin monit
+umountfs: umountnfs.sh lighttpd hwclock.sh dovecot ifupdown portmap exim4 mysql munin-node monit urandom atd postfix networking munin
+lvm2: umountfs monit
+umountroot: umountfs lvm2 monit
+halt: umountroot monit
+reboot: umountroot monit
