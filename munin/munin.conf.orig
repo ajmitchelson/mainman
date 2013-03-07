@@ -9,8 +9,6 @@
 # htmldir /var/cache/munin/www
 # logdir /var/log/munin
 # rundir  /var/run/munin
-dbdir	/NAS/munin/db
-htmldir /NAS/www/munin
 #
 # Where to look for the HTML templates
 # tmpldir	/etc/munin/templates
@@ -28,7 +26,6 @@ includedir /etc/munin/munin-conf.d
 # http://munin.projects.linpro.no/wiki/CgiHowto
 #
 #graph_strategy cgi
-html_strategy cgi
 
 # munin-cgi-graph is invoked by the web server up to very many times at the
 # same time.  This is not optimal since it results in high CPU and memory
@@ -60,7 +57,7 @@ html_strategy cgi
 #contact.nagios.command /usr/bin/send_nsca nagios.host.comm -c /etc/nsca.conf
 
 # a simple host tree
-[mainman.home.lan]
+[localhost.localdomain]
     address 127.0.0.1
     use_node_name yes
 
