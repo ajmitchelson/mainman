@@ -1,21 +1,22 @@
-TARGETS = killprocs nfs-common portmap rsyslog saslauthd sudo lighttpd mysql atd rsync acpid cron ntp ssh smartmontools dovecot exim4 postfix bootlogs single fetchmail munin-node monit rc.local stop-bootlogd rmnologin
+TARGETS = killprocs nfs-common portmap rsyslog saslauthd sudo lighttpd mysql atd smartmontools rsync acpid cron ntp ssh FAHClient dovecot exim4 postfix bootlogs single fetchmail munin-node monit rc.local stop-bootlogd rmnologin
 INTERACTIVE =
 lighttpd: rsyslog
 mysql: rsyslog
 atd: rsyslog
+smartmontools: rsyslog
 rsync: rsyslog
 acpid: rsyslog
 cron: rsyslog
 ntp: rsyslog
 ssh: rsyslog
-smartmontools: rsyslog
+FAHClient: rsyslog
 dovecot: rsyslog mysql
 exim4: rsyslog mysql
 postfix: rsyslog mysql saslauthd dovecot
 single: killprocs bootlogs
 fetchmail: rsyslog postfix exim4
-munin-node: nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd bootlogs rsync acpid cron fetchmail ntp sudo ssh smartmontools
-monit: nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd bootlogs rsync acpid cron fetchmail ntp sudo ssh smartmontools
-rc.local: rsyslog nfs-common lighttpd dovecot mysql portmap exim4 atd postfix saslauthd bootlogs rsync acpid cron fetchmail ntp sudo ssh smartmontools
-stop-bootlogd: nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd bootlogs rsync acpid cron fetchmail ntp sudo ssh smartmontools
-rmnologin: sudo nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd bootlogs rsync acpid cron fetchmail ntp ssh smartmontools
+munin-node: nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd smartmontools bootlogs rsync acpid cron fetchmail ntp sudo ssh FAHClient
+monit: nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd smartmontools bootlogs rsync acpid cron fetchmail ntp sudo ssh FAHClient
+rc.local: rsyslog nfs-common lighttpd dovecot mysql portmap exim4 atd postfix saslauthd smartmontools bootlogs rsync acpid cron fetchmail ntp sudo ssh FAHClient
+stop-bootlogd: nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd smartmontools bootlogs rsync acpid cron fetchmail ntp sudo ssh FAHClient
+rmnologin: sudo nfs-common lighttpd rsyslog dovecot mysql portmap exim4 atd postfix saslauthd smartmontools bootlogs rsync acpid cron fetchmail ntp ssh FAHClient
