@@ -1,23 +1,23 @@
-TARGETS = munin-node monit urandom portmap lighttpd atd smartmontools FAHClient exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh nfs-common networking hwclock.sh ifupdown umountfs lvm2 umountroot halt reboot
+TARGETS = munin-node monit urandom portmap lighttpd FAHClient atd smartmontools exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh nfs-common networking hwclock.sh ifupdown umountfs lvm2 umountroot halt reboot
 urandom: munin-node monit
 portmap: munin-node monit
 lighttpd: munin-node monit
+FAHClient: munin-node monit
 atd: munin-node monit
 smartmontools: munin-node monit
-FAHClient: munin-node monit
 exim4: munin-node monit
 postfix: munin-node monit
 saslauthd: postfix munin-node monit
 dovecot: postfix munin-node monit
 mysql: dovecot exim4 postfix munin-node monit
-sendsigs: lighttpd dovecot munin-node exim4 mysql monit atd postfix FAHClient
-rsyslog: lighttpd dovecot exim4 mysql atd postfix sendsigs smartmontools FAHClient munin-node monit
-umountnfs.sh: lighttpd dovecot munin-node sendsigs exim4 mysql monit atd postfix rsyslog FAHClient
+sendsigs: lighttpd dovecot munin-node exim4 mysql monit FAHClient atd postfix
+rsyslog: lighttpd dovecot exim4 mysql FAHClient atd postfix sendsigs smartmontools munin-node monit
+umountnfs.sh: lighttpd dovecot munin-node sendsigs exim4 mysql monit FAHClient atd postfix rsyslog
 nfs-common: umountnfs.sh munin-node monit
-networking: umountnfs.sh lighttpd dovecot portmap exim4 mysql postfix FAHClient munin-node monit
+networking: umountnfs.sh lighttpd dovecot portmap exim4 mysql FAHClient postfix munin-node monit
 hwclock.sh: mysql nfs-common atd rsyslog munin-node monit
-ifupdown: umountnfs.sh lighttpd dovecot portmap exim4 mysql postfix networking FAHClient munin-node monit
-umountfs: umountnfs.sh lighttpd hwclock.sh dovecot munin-node ifupdown portmap exim4 mysql monit urandom atd postfix networking FAHClient
+ifupdown: umountnfs.sh lighttpd dovecot portmap exim4 mysql FAHClient postfix networking munin-node monit
+umountfs: umountnfs.sh lighttpd hwclock.sh dovecot munin-node ifupdown portmap exim4 mysql monit FAHClient urandom atd postfix networking
 lvm2: umountfs munin-node monit
 umountroot: umountfs lvm2 munin-node monit
 halt: umountroot munin-node monit

@@ -15,7 +15,7 @@
   <team value="45032"/>         <!-- Your team number -->
   <passkey value="9b31e4ed2ad7ea53669c74f941b7acd3"/>       <!-- 32 hexadecimal characters if provided -->
 
-  <smp value="true"/>       <!-- If true, attempt to autoconfigure SMP -->
+  <smp value="false"/>       <!-- If true, attempt to autoconfigure SMP -->
   <gpu value="false"/>       <!-- If true, attempt to autoconfigure GPUs -->
 
   <!-- Folding Slots -->
