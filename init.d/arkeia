@@ -1,0 +1,59 @@
+#!/bin/sh
+#
+# chkconfig: 345 60 10
+# description: Startup script for the Arkeia Network Backup boot daemon
+#
+### BEGIN INIT INFO
+# Provides:          arkeia
+# Required-Start:    $network
+# Required-Stop:     $network
+# Default-Start:     S 2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: The Arkeia Network Backup main daemon
+### END INIT INFO
+#
+# ident "@(#)arkeia	1.6 - (C) Arkeia Software 2013"
+##############################################################################
+
+# FIXME status is not implemented
+# FIXME exit statuses are prolly not right
+
+USAGE="Usage: $0 {force-reload | restart | start | stop}"
+
+if test -z "$ARKEIA_DIR"
+then
+	if test -f /etc/opt/arkeia/ARKEIA_DIR
+	then
+		ARKEIA_DIR=`cat /etc/opt/arkeia/ARKEIA_DIR`
+	else
+		ARKEIA_DIR=/opt/arkeia
+	fi
+fi
+export ARKEIA_DIR
+
+action="$1"
+case "$action" in
+start|stop)
+	if test ! -f "$ARKEIA_DIR"/bin/arkboot
+	then
+		echo "$ARKEIA_DIR/bin/arkboot does not exist" 1>&2
+		exit 1
+	else
+		"$ARKEIA_DIR"/bin/arkboot "$action"
+	fi
+	;;
+restart|force-reload)
+	if test ! -f "$ARKEIA_DIR"/bin/arkboot
+	then
+		echo "$ARKEIA_DIR/bin/arkboot does not exist" 1>&2
+		exit 1
+	else
+		"$ARKEIA_DIR"/bin/arkboot stop
+		"$ARKEIA_DIR"/bin/arkboot start
+	fi
+	;;
+*)
+	echo ${USAGE}
+	;;
+esac
+exit 0
