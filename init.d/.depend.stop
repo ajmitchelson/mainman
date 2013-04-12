@@ -1,7 +1,8 @@
-TARGETS = munin-node monit urandom portmap arkeia lighttpd atd smartmontools exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh nfs-common networking hwclock.sh ifupdown umountfs lvm2 umountroot halt reboot
+TARGETS = munin-node monit urandom arkeia portmap arkwui lighttpd atd smartmontools exim4 postfix saslauthd dovecot mysql sendsigs rsyslog umountnfs.sh nfs-common networking hwclock.sh ifupdown umountfs lvm2 umountroot halt reboot
 urandom: munin-node monit
-portmap: munin-node monit
 arkeia: munin-node monit
+portmap: munin-node monit
+arkwui: munin-node monit
 lighttpd: munin-node monit
 atd: munin-node monit
 smartmontools: munin-node monit
@@ -14,9 +15,9 @@ sendsigs: lighttpd dovecot munin-node exim4 mysql monit atd postfix
 rsyslog: lighttpd dovecot exim4 mysql atd postfix sendsigs smartmontools munin-node monit
 umountnfs.sh: lighttpd dovecot munin-node sendsigs exim4 mysql monit atd postfix rsyslog
 nfs-common: umountnfs.sh munin-node monit
-networking: umountnfs.sh lighttpd dovecot portmap exim4 mysql postfix arkeia munin-node monit
+networking: umountnfs.sh lighttpd dovecot arkeia portmap exim4 mysql postfix arkwui munin-node monit
 hwclock.sh: mysql nfs-common atd rsyslog munin-node monit
-ifupdown: umountnfs.sh lighttpd dovecot portmap exim4 mysql postfix networking arkeia munin-node monit
+ifupdown: umountnfs.sh lighttpd dovecot arkeia portmap exim4 mysql postfix networking arkwui munin-node monit
 umountfs: umountnfs.sh lighttpd hwclock.sh dovecot munin-node ifupdown portmap exim4 mysql monit urandom atd postfix networking
 lvm2: umountfs munin-node monit
 umountroot: umountfs lvm2 munin-node monit
