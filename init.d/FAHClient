@@ -1,0 +1,246 @@
+#!/bin/bash
+# chkconfig: 2345 95 20
+# description: Folding@home Client
+# Starts FAHClient
+# processname: FAHClient
+
+### BEGIN INIT INFO
+# Provides:          FAHClient
+# Required-Start:    $remote_fs $syslog $network
+# Required-Stop:     $remote_fs $syslog $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Folding@home Client
+# Description:       Start and stop Folding@home Client daemon
+### END INIT INFO
+
+USER=fahclient
+NAME=fahclient
+CONFIG=/etc/$NAME/config.xml
+DEFAULT=/etc/default/$NAME
+HOME=/var/lib/$NAME
+EXEC=/usr/bin/FAHClient
+LOG=$HOME/log.txt
+PID=/var/run/$NAME.pid
+EXTRA_OPTS=
+QUIET=true
+ENABLE=true
+
+
+if [ -s $DEFAULT ]; then
+    . $DEFAULT
+
+    case "x$ENABLE" in
+        xtrue|xfalse) ;;
+        *)
+            echo "Value of ENABLE in $DEFAULT must be either 'true' or 'false';"
+            echo "not starting FAHClient."
+            ENABLE=false
+            ;;
+    esac
+fi
+
+
+get_pid() {
+    cat $PID
+}
+
+
+is_running() {
+    if [ -e $PID ]; then
+        ps -hp $(get_pid) 2>/dev/null >/dev/null
+        return $?
+    else
+        return 1
+    fi
+}
+
+
+log_status() {
+    stat -c "%X" $LOG 2>/dev/null
+}
+
+
+wait_for_log_change() {
+    if [ "$2" != "" ]; then
+        pid=$2
+    else
+        pid=$(get_pid)
+    fi
+
+    while [ "$(log_status)" == "$1" ]; do        
+        if ps -hp $pid 2>/dev/null >/dev/null; then
+            sleep 1
+        else
+            return 1
+        fi
+    done
+
+    return 0
+}
+
+
+start() {
+    if ! $ENABLE; then
+        echo "ENABLE set to false in $DEFAULT, not starting FAHClient"
+        echo "Use 'force-start' to override."
+        return;
+    fi
+
+    echo -n "Starting $NAME ... "
+
+    OPTS=
+    if [ -e $CONFIG ]; then
+        OPTS+="$CONFIG "
+    fi
+    OPTS+="$EXTRA_OPTS "
+    OPTS+="--run-as $USER "
+    OPTS+="--pid-file=$PID "
+    OPTS+="--daemon "
+
+    if is_running; then
+        echo "FAILED"
+        echo "$NAME seems to be already running with PID $(get_pid)"
+        exit 1
+    else
+        rm -f $PID
+    fi
+
+    if [ ! -d $HOME ]; then
+        mkdir -p $HOME
+        chown $USER $HOME
+    fi
+    
+    cd $HOME
+    LOG_STATUS=$(log_status)
+
+    if $QUIET; then
+        $EXEC $OPTS >/dev/null 2>/dev/null &
+    else
+        $EXEC $OPTS &
+    fi
+
+    pid=$!
+    if wait_for_log_change "$LOG_STATUS" $pid; then
+        echo "OK"
+    else
+        echo "FAIL"
+        exit 1
+    fi
+}
+
+
+stop() {
+    if [ -e $PID ]; then
+        echo -n "Stopping $NAME ... "
+
+        if kill $(get_pid) 2>/dev/null; then
+            while is_running; do
+                sleep 1
+            done
+            rm -rf $PID
+
+            echo "OK"
+        else
+            echo "FAILED"
+        fi
+    fi
+}
+
+
+reload() {
+    echo -n "Reloading $NAME ... "
+    LOG_STATUS=$(log_status)
+    pid=$(get_pid)
+    if is_running && kill -SIGUSR1 $pid 2>/dev/null &&
+        wait_for_log_change "$LOG_STATUS" $pid; then
+        echo "OK"
+    else
+        echo "FAIL"
+        exit 1
+    fi
+}
+
+
+status() {
+    if is_running; then
+        echo "$NAME is running with PID $(get_pid)"
+    else
+        echo "$NAME is not running"
+    fi
+}
+
+
+log() {
+    if [ -e $LOG ]; then
+        tail -f $LOG
+    fi
+}
+
+
+usage() {
+    echo -e "Syntax: $0 [OPTIONS] <COMMAND> [-- [OPTIONS]]"
+    echo -e "COMMANDS:"
+    echo -e "\tstart          Start client"
+    echo -e "\tstop           Stop client"
+    echo -e "\trestart        Full stop then restart client"
+    echo -e "\treload         Respawn client process"
+    echo -e "\tstatus         Print client status"
+    echo -e "\tlog            Tail the client log"
+    echo -e "OPTIONS:"
+    echo -e "\t-u <user>      Run as this user."
+    echo -e "\t-h <home>      Run in this directory."
+    echo -e "\t-v             Be verbose.  Show WS output"
+    echo -e
+    echo -e "Any options after a '--' will be passed on to the client."
+}
+
+if [ $# -eq 0 ]; then
+    usage
+    exit 0
+fi
+
+EXTRA=false
+COMMANDS=
+while [ "$1" != "" ]; do
+    case "$1" in
+        -h) HOME=$2; shift ;;
+        -u) USER=$2; shift ;;
+        -v) QUIET=false ;;
+        --help) usage ;;
+        --) EXTRA=true ;;
+        -*)
+            if $EXTRA; then
+                EXTRA_OPTS+="$1 "
+            else
+                usage
+                echo "Invalid argument '$1'"
+                exit 1
+            fi
+            ;;
+        *)
+            if $EXTRA; then
+                EXTRA_OPTS+="$1 "
+            else
+                COMMANDS+="$1 "
+            fi
+    esac
+    shift
+done
+
+for c in $COMMANDS; do
+    case $c in
+        force-start) ENABLE=true; start ;;
+        start) start ;;
+        stop) stop ;;
+        restart) stop; start ;;
+        force-reload|reload) reload ;;
+        status) status ;;
+        log) log ;;
+        *)
+            usage
+            echo "Invalid command '$1'"
+            exit 1
+            ;;
+    esac
+done

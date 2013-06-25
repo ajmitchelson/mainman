@@ -31,4 +31,4 @@ mountnfs-bootclean.sh: mountall.sh mountoverflowtmp mountnfs.sh
 kbd: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh
 console-setup: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh kbd
 bootmisc.sh: mountall.sh mountoverflowtmp mountnfs.sh mountnfs-bootclean.sh udev
-stop-bootlogd-single: mountall.sh mountoverflowtmp udev keyboard-setup console-setup networking ifupdown nfs-common mountnfs.sh mountnfs-bootclean.sh hwclock.sh checkroot.sh arkeia ifupdown-clean portmap lvm2 mountdevsubfs.sh checkfs.sh urandom mountkernfs.sh hostname.sh hwclockfirst.sh kbd mountall-bootclean.sh procps module-init-tools x11-common mtab.sh bootlogd bootmisc.sh udev-mtab arkwui
+stop-bootlogd-single: mountall.sh mountoverflowtmp udev keyboard-setup console-setup networking ifupdown nfs-common mountnfs.sh mountnfs-bootclean.sh hwclock.sh checkroot.sh arkeia ifupdown-clean portmap arkwui lvm2 mountdevsubfs.sh checkfs.sh urandom mountkernfs.sh hostname.sh hwclockfirst.sh kbd mountall-bootclean.sh procps module-init-tools x11-common mtab.sh bootlogd bootmisc.sh udev-mtab
